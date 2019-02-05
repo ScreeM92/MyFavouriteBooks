@@ -1,0 +1,32 @@
+<%
+  # form_for is a rails helper for rendering forms in the view  
+  # @book is an instance scoped variable that is declared in 
+  # books_controller new method. It points to a new
+  # instance of the Book model
+  # book.submit will need a create action
+%>
+
+
+<%= form_for @book do |book| %>
+  <%= book.label :title %><br>
+  <%= book.text_field :title %><br>
+  <br>
+  <%= book.label :description %><br>
+  <%= book.text_area :description %><br>
+  <br>
+  <%= book.label :isbnNumber %><br>
+  <%= book.text_field :isbnNumber %><br>
+  <br>
+  <%= book.label :publishDate %><br>
+  <%= book.datetime_field :publishDate %><br>
+  <br>
+  <%= book.label :author %><br>
+  <%= book.text_field :author %><br>
+  <br>
+  <%= book.label :genre %><br>
+  <%= book.select(:genre, options_for_select([['Horror', 'horror'], ['Science fiction', 'science_fiction'], ['Drama', 'drama'], ['Action and Adventure', 'actionAndAdventure'], ['Romance', 'romance'], ['Mystery', 'mystery'] ]), { :selected => @book.genre }) %>
+  <br>
+  <br>
+
+  <%= book.submit %>
+<% end %>

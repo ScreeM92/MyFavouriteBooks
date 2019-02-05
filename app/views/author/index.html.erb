@@ -1,0 +1,50 @@
+<%
+  # this is called by the index method in 
+  # the books controller
+%>
+
+<h2>Same Author Home Page</h2>
+
+<table id="books">
+  <thead>
+    <tr>
+      <th>Book Title</th>
+      <th>Description</th>
+      <th>Genre</th>
+      <th>ISBN Number</th>
+      <th>Publish Date</th>
+      <th>Author</th>
+      <th>More Info</th>
+    </tr>
+  </thead>
+ 
+  <tbody>
+    <% @books.each do |book| %>
+      <tr>
+        <td><%= book.title %></td>
+        <td><%= truncate(book.description, :length => 50) %></td>
+        <td>
+          <% if book.genre == 'horror' %>
+            Horror
+          <% elsif book.genre == 'science_fiction'  %>
+            Science fiction
+          <% elsif book.genre == 'drama'  %>
+            Drama
+          <% elsif book.genre == 'actionAndAdventure'  %>
+            Action and Adventure
+          <% elsif book.genre == 'romance'  %>
+            Romance
+          <% elsif book.genre == 'mystery'  %>
+            Mystery
+          <% end %>
+        </td>
+        <td><%= book.isbnNumber %></td>
+        <td><%= book.publishDate %></td>
+        <td><%= book.author %></td>
+        <td><%= link_to "Read More", book %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+

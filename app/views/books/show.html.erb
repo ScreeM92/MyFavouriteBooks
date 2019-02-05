@@ -1,0 +1,31 @@
+<h3>Show Book Page</h3>
+
+<h3><%= @book.title %></h3>
+
+<p><%= @book.description %></p>
+
+<p>Genre: 
+<% if @book.genre == 'horror' %>
+  Horror
+<% elsif @book.genre == 'science_fiction'  %>
+  Science fiction
+<% elsif @book.genre == 'drama'  %>
+  Drama
+<% elsif @book.genre == 'actionAndAdventure'  %>
+  Action and Adventure
+<% elsif @book.genre == 'romance'  %>
+  Romance
+<% elsif @book.genre == 'mystery'  %>
+  Mystery
+<% end %>
+  
+</p>
+<p>ISBN Number: <%= @book.isbnNumber %></p>
+<p>Publish Date: <%= @book.publishDate.to_date %></p>
+<p>Author: <%= @book.author %></p>
+
+<%= link_to "Edit Book Details", edit_book_path(@book) %>
+<br/>
+<%= link_to "Delete Book", book_path(@book), method: :delete, data: {confirm: "Are you sure?"} %>
+<br/>
+<%= link_to "Find Books With Same Author", author_index_path(:q => @book.author) %>

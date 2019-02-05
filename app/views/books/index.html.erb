@@ -1,0 +1,103 @@
+<%
+  # this is called by the index method in 
+  # the books controller
+%>
+
+<h2>Books Home Page</h2>
+<p>
+  <%= form_tag("/", method: "get") do %>
+    <%= label_tag(:genre, "Filter by genre:") %>
+    <br>
+
+    <% if @selected_genre.include? 'Horror' %>
+        <input type="checkbox" name="genre[]" checked value="Horror" />Horror
+    <% else  %>
+      <input type="checkbox" name="genre[]" value="Horror" />Horror
+    <% end  %>
+    <br>
+
+    <% if @selected_genre.include? 'Science fiction' %>
+        <input type="checkbox" name="genre[]" checked value="Science fiction" />Science fiction
+    <% else  %>
+      <input type="checkbox" name="genre[]" value="Science fiction" />Science fiction
+    <% end  %>
+    <br>
+
+    <% if @selected_genre.include? 'Drama' %>
+        <input type="checkbox" name="genre[]" checked value="Drama" />Drama
+    <% else  %>
+      <input type="checkbox" name="genre[]" value="Drama" />Drama
+    <% end  %>
+    <br>
+
+    <% if @selected_genre.include? 'Action and Adventure' %>
+        <input type="checkbox" name="genre[]" checked value="Action and Adventure" />Action and Adventure
+    <% else  %>
+      <input type="checkbox" name="genre[]" value="Action and Adventure" />Action and Adventure
+    <% end  %>
+    <br>
+
+    <% if @selected_genre.include? 'Romance' %>
+        <input type="checkbox" name="genre[]" checked value="Romance" />Romance
+    <% else  %>
+      <input type="checkbox" name="genre[]" value="Romance" />Romance
+    <% end  %>
+    <br>
+
+    <% if @selected_genre.include? 'Mystery' %>
+        <input type="checkbox" name="genre[]" checked value="Mystery" />Mystery
+    <% else  %>
+      <input type="checkbox" name="genre[]" value="Mystery" />Mystery
+    <% end  %>
+    <br>
+    <br>
+    <%= submit_tag("Search") %>
+  <% end %>
+  <%= form_tag("/?refresh=true", method: "get") do %>
+    <%= submit_tag("Refresh") %>
+  <% end %>
+</p>
+
+<table id="books">
+  <thead>
+    <tr>
+      <th class="<%=@title_header%>"><%=link_to 'Book Title', books_path(:sort => 'title', :by => 'asc', :genre => @selected_genre), :id => 'title_header' %></th>
+      <th>Description</th>
+      <th>Genre</th>
+      <th>ISBN Number</th>
+      <th class="<%=@publishDate_header%>"><%=link_to 'Publish Date', books_path(:sort => 'publishDate',  :by => 'asc', :genre => @selected_genre), :id => 'publishDate_header' %></th>
+      <th>Author</th>
+      <th>More Info</th>
+    </tr>
+  </thead>
+ 
+  <tbody>
+    <% @books.each do |book| %>
+      <tr>
+        <td><%= book.title %></td>
+        <td><%= truncate(book.description, :length => 50) %></td>
+        <td>
+          <% if book.genre == 'horror' %>
+            Horror
+          <% elsif book.genre == 'science_fiction'  %>
+            Science fiction
+          <% elsif book.genre == 'drama'  %>
+            Drama
+          <% elsif book.genre == 'actionAndAdventure'  %>
+            Action and Adventure
+          <% elsif book.genre == 'romance'  %>
+            Romance
+          <% elsif book.genre == 'mystery'  %>
+            Mystery
+          <% end %>
+        </td>
+        <td><%= book.isbnNumber %></td>
+        <td><%= book.publishDate %></td>
+        <td><%= book.author %></td>
+        <td><%= link_to "Read More", book %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
