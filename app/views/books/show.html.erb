@@ -28,4 +28,4 @@
 <br/>
 <%= link_to "Delete Book", book_path(@book), method: :delete, data: {confirm: "Are you sure?"} %>
 <br/>
-<%= link_to "Find Books With Same Author", author_index_path(:q => @book.author) %>
+<%= link_to "Find Books With Same Author", author_index_path(:q => @book.author, :title => @book.title) %>
